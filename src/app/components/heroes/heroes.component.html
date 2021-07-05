@@ -1,0 +1,17 @@
+<h1> Heroes </h1>
+<hr>
+
+<h2> My Heroes </h2>
+<div>
+    <button mat-raised-button color="primary" (click)="generateNewHero()">Generate New Hero</button>
+</div>
+<div style="display: flex; flex-wrap: wrap;">
+    <app-hero-card *ngFor="let hero of heroes" [hero]="hero"></app-hero-card>
+</div>
+<hr>
+
+<h2> Other Trainers' Heroes </h2>
+<div style="display: flex; flex-wrap: wrap;">
+    <app-hero-card></app-hero-card>
+    <app-hero-card></app-hero-card>
+</div>

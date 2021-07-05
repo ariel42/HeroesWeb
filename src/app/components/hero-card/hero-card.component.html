@@ -1,0 +1,43 @@
+<mat-card class="example-card" *ngIf="hero">
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image"></div>
+    <mat-card-title>{{hero.name}}</mat-card-title>
+    <mat-card-subtitle>Super Hero</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-checkbox class="example-margin" [ngModel]="hero.isAttacker" (click)="$event.preventDefault()">Attacker</mat-checkbox>
+    <mat-checkbox class="example-margin" [ngModel]="hero.isDefender" (click)="$event.preventDefault()">Defender</mat-checkbox>
+  </mat-card-content>
+  <mat-card-content>
+    Suit part 1 color:
+    <input class="color-input" disabled [style.background]="hero.suitPart1Color"/>
+  </mat-card-content>
+  <mat-card-content>
+    Suit part 2 color:
+    <input class="color-input" disabled [style.background]="hero.suitPart2Color"/>
+  </mat-card-content>
+  <mat-card-content>
+    Suit part 3 color:
+    <input class="color-input" disabled [style.background]="hero.suitPart3Color"/>
+  </mat-card-content>
+  <mat-card-content>
+    Starting power: {{hero.startingPower}}
+  </mat-card-content>
+  <mat-card-content>
+    First training date: {{hero.firstTrainingDate?.toLocaleDateString("en-GB")}}
+  </mat-card-content>
+  <mat-card-content>
+    Current power: {{hero.currentPower.toFixed(2)}}
+  </mat-card-content>
+  <mat-card-content>
+    Number of training today: {{hero.numTrainingToday}}
+  </mat-card-content>
+  <mat-card-actions>
+    <!-- <button mat-button (click)="editHero(hero)">EDIT</button> -->
+    <button mat-button 
+      [disabled]="hero.numTrainingToday >= maxTraingPerDay"
+      (click)="trainHero(hero)"> 
+        TRAIN
+    </button>
+  </mat-card-actions>
+</mat-card>
