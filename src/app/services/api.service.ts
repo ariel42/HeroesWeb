@@ -17,7 +17,7 @@ export class ApiService {
 
   getHeroes() {
     return this.http.get<Hero[]>(this.apiBaseUrl + "/heroes").pipe(
-      tap(heros => heros.forEach(h => this.parseHero(h)))
+      tap(heroes => heroes.forEach(h => this.parseHero(h)))
     );
   }
 
