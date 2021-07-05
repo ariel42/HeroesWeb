@@ -16,7 +16,7 @@ export class ApiService {
   ) { }
 
   getHeroes() {
-    return this.http.get<Hero[]>(this.apiBaseUrl + "/heroes").pipe(
+    return this.http.get<Hero[]>(this.apiBaseUrl + "/heroes", { withCredentials: true }).pipe(
       tap(heroes => heroes.forEach(h => this.parseHero(h)))
     );
   }
