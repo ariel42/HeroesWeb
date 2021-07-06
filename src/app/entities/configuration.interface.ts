@@ -1,6 +1,6 @@
-import { ApiDetails } from "./api-details.interface";
+import { ApiConfiguartion } from "./api-configuration.interface";
 
 export interface Configuration {
   apiBaseUrl: string;
-  api: ApiDetails
+  api: ApiConfiguartion
 }

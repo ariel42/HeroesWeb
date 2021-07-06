@@ -30,7 +30,7 @@ export class HeroesComponent implements OnInit {
       suitPart2Color: '#' + this.randInt(256 ** 3).toString(16).padStart(6, "0"),
       suitPart3Color: '#' + this.randInt(256 ** 3).toString(16).padStart(6, "0")
     }
-    this.apiService.saveHero(hero).subscribe(newHero => {
+    this.apiService.createHero(hero).subscribe(newHero => {
       this.heroes.push(newHero);
     }, e => alert(e?.error || e));
   }

@@ -16,7 +16,7 @@ export class ApiService {
   ) { }
 
   getHeroes() {
-    return this.http.get<Hero[]>(this.apiBaseUrl + "/heroes", { withCredentials: true }).pipe(
+    return this.http.get<Hero[]>(this.apiBaseUrl + "/heroes").pipe(
       tap(heroes => heroes.forEach(h => this.parseHero(h)))
     );
   }
@@ -27,8 +27,14 @@ export class ApiService {
     );
   }
 
-  saveHero(hero: Partial<Hero>) {
+  createHero(hero: Partial<Hero>) {
     return this.http.post<Hero>(`${this.apiBaseUrl}/heroes`, hero).pipe(
+      tap(h => this.parseHero(h))
+    );
+  }
+
+  updateHero(hero: Partial<Hero>) {
+    return this.http.put<Hero>(`${this.apiBaseUrl}/heroes/${hero.id}`, hero).pipe(
       tap(h => this.parseHero(h))
     );
   }

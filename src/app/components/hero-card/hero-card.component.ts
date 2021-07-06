@@ -27,4 +27,11 @@ export class HeroCardComponent implements OnInit {
       this.hero = hero
     }, e => alert(e?.error || e?.message || e));
   }
+
+  updateHero(hero: Hero) {
+    const updatedHero = { ...hero, name: "UPDATED" };
+    this.apiService.updateHero(updatedHero).subscribe(
+      h => this.hero = h,
+      e => alert(e?.error || e?.message || e));
+  }
 }

@@ -33,7 +33,7 @@
     Number of training today: {{hero.numTrainingToday}}
   </mat-card-content>
   <mat-card-actions>
-    <!-- <button mat-button (click)="editHero(hero)">EDIT</button> -->
+    <!-- <button mat-button (click)="updateHero(hero)">EDIT</button> -->
     <button mat-button 
       [disabled]="hero.numTrainingToday >= maxTraingPerDay"
       (click)="trainHero(hero)"> 

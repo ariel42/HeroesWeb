@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Configuration } from './entities/configuration.interface';
 import { AppConfigService } from './services/config.service';
 
 @Component({
@@ -8,8 +9,9 @@ import { AppConfigService } from './services/config.service';
 })
 export class AppComponent {
   title = 'HeroesWeb';
-
+  config: Configuration;
+  
   constructor(appConfig: AppConfigService) {
-    console.log(appConfig.configuration);
+    this.config = appConfig.configuration!;
   }
 }

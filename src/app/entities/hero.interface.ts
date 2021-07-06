@@ -1,6 +1,6 @@
 export interface Hero {
   id: string;
-  trainerId: number;
+  trainerName: string;
   name: string;
   isAttacker: boolean;
   isDefender: boolean;
