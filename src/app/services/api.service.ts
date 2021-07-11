@@ -25,7 +25,7 @@ export class ApiService {
   }
 
   trainHero(hero: Hero) {
-    return this.http.put<Hero>(`${this.apiBaseUrl}/heroes/${hero.id}/training`, hero).pipe(
+    return this.http.put<Hero>(`${this.apiBaseUrl}/heroes/${hero.id}/training`, {}).pipe(
       tap(h => this.parseHero(h))
     );
   }
