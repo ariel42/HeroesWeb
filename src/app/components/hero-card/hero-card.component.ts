@@ -27,6 +27,6 @@ export class HeroCardComponent implements OnInit {
   trainHero(hero: Hero) {
     this.apiService.trainHero(hero).subscribe(hero => {
       this.hero = hero
-    }, e => alert(e?.error || e?.message || e));
+    }, e => alert(e?.error?.message || e?.error || e));
   }
 }

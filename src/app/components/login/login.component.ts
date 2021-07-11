@@ -20,12 +20,12 @@ export class LoginComponent implements OnInit {
   login(username: string, password: string) {
     this.apiService.login(username, password).subscribe(() => {
       this.router.navigate(["/heroes"]);
-    }, e => alert(e?.error || e));
+    }, e => alert(e?.error?.message || e?.error || e));
   }
 
   signup(username: string, password: string) {
     this.apiService.signup(username, password).subscribe(() => {
       this.router.navigate(["/heroes"]);
-    }, e => alert(e?.error || e));
+    }, e => alert(e?.error?.message || e?.error || e));
   }
 }
