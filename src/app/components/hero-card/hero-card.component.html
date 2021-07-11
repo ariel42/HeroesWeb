@@ -30,6 +30,9 @@
     Current power: {{hero.currentPower.toFixed(2)}}
   </mat-card-content>
   <mat-card-content>
+    Trainer name: {{hero.trainerName}}
+  </mat-card-content>
+  <mat-card-content>
     Number of training today: {{hero.numTrainingToday}}
   </mat-card-content>
   <mat-card-actions *ngIf="hero.trainerName === username">
