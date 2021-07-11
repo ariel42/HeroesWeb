@@ -11,12 +11,14 @@ import { AppConfigService } from 'src/app/services/config.service';
 export class HeroCardComponent implements OnInit {
   @Input() hero?: Hero;
   maxTraingPerDay: number;
+  username: string | undefined;
 
   constructor(
     private apiService: ApiService,
     appConfig: AppConfigService
   ) {
-    this.maxTraingPerDay = appConfig.configuration!.api.maxTrainingPerDay;
+    this.maxTraingPerDay = appConfig.configuration!.maxTrainingPerDay;
+    this.username = appConfig.configuration!.loggedInUser;
   }
 
   ngOnInit(): void {

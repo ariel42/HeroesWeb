@@ -32,7 +32,7 @@
   <mat-card-content>
     Number of training today: {{hero.numTrainingToday}}
   </mat-card-content>
-  <mat-card-actions>
+  <mat-card-actions *ngIf="hero.trainerName === username">
     <!-- <button mat-button (click)="updateHero(hero)">EDIT</button> -->
     <button mat-button 
       [disabled]="hero.numTrainingToday >= maxTraingPerDay"

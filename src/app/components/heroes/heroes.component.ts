@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Hero } from 'src/app/entities/hero.interface';
 import { ApiService } from 'src/app/services/api.service';
+import { AppConfigService } from 'src/app/services/config.service';
 
 @Component({
   selector: 'app-heroes',
@@ -8,14 +9,24 @@ import { ApiService } from 'src/app/services/api.service';
   styleUrls: ['./heroes.component.scss']
 })
 export class HeroesComponent implements OnInit {
-  heroes: Hero[] = [];
-
-  constructor(private apiService: ApiService) { }
+  myHeroes: Hero[] = [];
+  otherHeroes: Hero[] = [];
+  constructor(
+    private apiService: ApiService,
+    private appConfig: AppConfigService
+  ) { }
 
   ngOnInit(): void {
     this.apiService.getHeroes().subscribe(heroes => {
-      this.heroes = heroes.sort((x, y) => x.currentPower - y.currentPower);
-    }, e => alert(e?.message || e));
+      this.myHeroes = [];
+      this.otherHeroes = [];
+      heroes.sort((x, y) => x.currentPower - y.currentPower).forEach(hero => {
+        const array = hero.trainerName === this.appConfig.configuration?.loggedInUser ?
+          this.myHeroes :
+          this.otherHeroes;
+        array.push(hero);
+      });
+    }, e => alert(e?.error || e));
   }
 
   generateNewHero() {
@@ -31,7 +42,7 @@ export class HeroesComponent implements OnInit {
       suitPart3Color: '#' + this.randInt(256 ** 3).toString(16).padStart(6, "0")
     }
     this.apiService.createHero(hero).subscribe(newHero => {
-      this.heroes.push(newHero);
+      this.myHeroes.push(newHero);
     }, e => alert(e?.error || e));
   }
 

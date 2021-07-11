@@ -10,14 +10,18 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatInputModule } from '@angular/material/input';
+import { MatDividerModule } from '@angular/material/divider';
 import { FormsModule } from '@angular/forms';
 import { AuthInterceptorService } from './services/auth-interceptor.service';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeroesComponent,
-    HeroCardComponent
+    HeroCardComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -27,7 +31,9 @@ import { AuthInterceptorService } from './services/auth-interceptor.service';
     BrowserAnimationsModule,
     MatCardModule,
     MatButtonModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatInputModule,
+    MatDividerModule
   ],
   providers: [{
     provide: APP_INITIALIZER,

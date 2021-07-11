@@ -3,12 +3,12 @@
     <button mat-raised-button color="primary" (click)="generateNewHero()">Generate New Hero</button>
 </div>
 <div style="display: flex; flex-wrap: wrap;">
-    <app-hero-card *ngFor="let hero of heroes" [hero]="hero"></app-hero-card>
+    <app-hero-card *ngFor="let hero of myHeroes" [hero]="hero"></app-hero-card>
 </div>
-<hr>
+<mat-divider></mat-divider>
+<br>
 
 <h2> Other Trainers' Heroes: </h2>
 <div style="display: flex; flex-wrap: wrap;">
-    <app-hero-card></app-hero-card>
-    <app-hero-card></app-hero-card>
+    <app-hero-card *ngFor="let hero of otherHeroes" [hero]="hero"></app-hero-card>
 </div>

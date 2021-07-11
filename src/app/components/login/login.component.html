@@ -1,0 +1,17 @@
+<h3>Please login or signup to countine:</h3>
+  <form style="width: 200px;">
+    <mat-form-field style="display: block;">
+      <mat-label>Name</mat-label>
+      <input matInput #username>
+    </mat-form-field>
+
+    <mat-form-field style="display: block;">
+      <mat-label>Password</mat-label>
+      <input type="password" matInput #password>
+    </mat-form-field>
+
+    <div style="display: flex; justify-content: space-between;">
+      <button mat-raised-button color="primary" (click)="login(username.value, password.value)">Login</button>
+      <button mat-raised-button color="primary" (click)="signup(username.value, password.value)">Signup</button>
+    </div>
+  </form>

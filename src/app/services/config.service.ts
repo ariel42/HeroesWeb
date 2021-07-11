@@ -16,10 +16,17 @@ export class AppConfigService {
   }
 
   loadAppConfig() {
+    let apiBaseUrl: string;
     const loader = this.http.get<Configuration>('../assets/config.json').pipe(
-      tap(config => this._configuration = config),
-      switchMap(config => this.http.get<ApiConfiguartion>(config.apiBaseUrl + "/configuration")),
-      tap(apiConfig => this._configuration!.api = apiConfig)
+      tap(config => apiBaseUrl = config.apiBaseUrl),
+      switchMap(() => this.http.get<ApiConfiguartion>(apiBaseUrl + "/configuration")),
+      tap(apiConfig => {
+        this._configuration = {
+          apiBaseUrl,
+          maxTrainingPerDay: apiConfig.maxTrainingPerDay,
+          loggedInUser: apiConfig.loggedInUser
+        }
+      })
     );
     return loader;
   }

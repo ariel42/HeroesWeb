@@ -2,7 +2,9 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from '@angular/common/http';
 import { AppConfigService } from "./config.service";
 import { Hero } from "../entities/hero.interface";
-import { tap } from "rxjs/operators";
+import { catchError, tap } from "rxjs/operators";
+import { Router } from "@angular/router";
+import { of } from "rxjs";
 
 @Injectable({ providedIn: "root" })
 export class ApiService {
@@ -12,7 +14,8 @@ export class ApiService {
 
   constructor(
     private http: HttpClient,
-    private appConfig: AppConfigService
+    private appConfig: AppConfigService,
+    private router: Router
   ) { }
 
   getHeroes() {
@@ -39,7 +42,52 @@ export class ApiService {
     );
   }
 
+  login(username: string, password: string) {
+    return this.http.post(this.apiBaseUrl + "/users/login", {
+      username,
+      password
+    }).pipe(
+      tap(() => this.appConfig.configuration!.loggedInUser = username)
+    );
+  }
+
+  signup(username: string, password: string) {
+    return this.http.post(this.apiBaseUrl + "/users", {
+      username,
+      password
+    }).pipe(
+      tap(() => this.appConfig.configuration!.loggedInUser = username)
+    );
+  }
+
+  logout() {
+    this.http.post(`${this.apiBaseUrl}/users/logout`, {}).pipe(
+      catchError(() => {
+        this.deleteAllCookies();
+        return of({});
+      })
+    ).subscribe(() => {
+      this.afterLogout();
+    });
+  }
+
   private parseHero(hero: Hero) {
     hero.firstTrainingDate = hero.firstTrainingDate && new Date(hero.firstTrainingDate)
+  }
+
+  private deleteAllCookies() {
+    var cookies = document.cookie.split(";");
+
+    for (var i = 0; i < cookies.length; i++) {
+      var cookie = cookies[i];
+      var eqPos = cookie.indexOf("=");
+      var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+      document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+    }
+  }
+
+  private afterLogout() {
+    this.appConfig.configuration!.loggedInUser = undefined;
+    this.router.navigate(["/login"]);
   }
 }
